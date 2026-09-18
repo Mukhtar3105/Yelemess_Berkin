@@ -8,7 +8,7 @@
 
   <style>
     :root {
-      --paper:rgba(255,250,240,.94);
+      --paper:rgba(255,250,240,.95);
       --text:#563927;
       --muted:#806654;
       --accent:#aa6942;
@@ -27,6 +27,8 @@
       color:var(--text);
       background:
         radial-gradient(circle at 50% 0%,rgba(255,255,255,.72),transparent 32%),
+        radial-gradient(circle at 5% 80%,rgba(181,133,82,.12),transparent 28%),
+        radial-gradient(circle at 95% 25%,rgba(199,153,102,.11),transparent 28%),
         linear-gradient(180deg,#f7efdf,#ecdbb9);
       padding:18px 12px 60px;
     }
@@ -47,11 +49,30 @@
       box-shadow:var(--shadow);
     }
 
-    .hero { text-align:center; }
+    .card::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity:.08;
+      background:
+        radial-gradient(circle at 18px 18px,rgba(164,111,67,.28) 0 1.5px,transparent 2px);
+      background-size:58px 58px;
+    }
+
+    .content {
+      position:relative;
+      z-index:1;
+    }
+
+    .hero {
+      text-align:center;
+      padding:42px 22px 38px;
+    }
 
     .eyebrow {
       display:inline-block;
-      margin-bottom:18px;
+      margin-bottom:20px;
       padding:8px 16px;
       border-radius:999px;
       border:1px solid var(--line);
@@ -62,33 +83,32 @@
       text-transform:uppercase;
     }
 
-    .photo-wrap {
-      width:220px;
-      height:220px;
-      margin:0 auto 22px;
-      border-radius:50%;
-      overflow:hidden;
-      background:#ead9bb;
-      box-shadow:0 16px 36px rgba(93,61,39,.16);
-    }
-
-    .photo-wrap img {
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
+    .ornament {
+      margin:8px auto 22px;
+      font-size:28px;
+      letter-spacing:10px;
+      color:#b58b63;
+      opacity:.72;
     }
 
     h1 {
       margin:0;
-      font-size:clamp(39px,10vw,62px);
+      font-size:clamp(42px,10vw,64px);
       line-height:1.08;
       color:#70472f;
     }
 
+    .hero-sub {
+      margin:14px auto 0;
+      max-width:520px;
+      font-size:20px;
+      line-height:1.55;
+      color:#795845;
+    }
+
     .date {
-      margin-top:12px;
-      font-size:24px;
+      margin-top:18px;
+      font-size:28px;
       font-weight:700;
       color:#9a6443;
     }
@@ -110,10 +130,10 @@
 
     .date-box {
       text-align:center;
-      padding:20px;
+      padding:22px;
       border-radius:20px;
       border:1px solid var(--line);
-      background:rgba(255,253,247,.72);
+      background:rgba(255,253,247,.74);
     }
 
     .date-label {
@@ -131,13 +151,19 @@
       color:#70462f;
     }
 
+    .date-sub {
+      margin-top:7px;
+      font-size:17px;
+      color:#806654;
+    }
+
     .form-card {
       max-width:610px;
       margin:auto;
       padding:22px;
       border:1px solid var(--line);
       border-radius:22px;
-      background:rgba(255,253,247,.70);
+      background:rgba(255,253,247,.72);
     }
 
     .intro {
@@ -173,13 +199,20 @@
       outline:none;
     }
 
+    .input:focus {
+      border-color:#bb7b52;
+      box-shadow:0 0 0 4px rgba(187,123,82,.11);
+    }
+
     .choices {
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:10px;
     }
 
-    .choice { position:relative; }
+    .choice {
+      position:relative;
+    }
 
     .choice input {
       position:absolute;
@@ -202,6 +235,7 @@
       font-weight:700;
       text-align:center;
       color:#745541;
+      transition:.18s ease;
     }
 
     .choice input:checked + label {
@@ -254,9 +288,20 @@
         border-radius:22px;
       }
 
-      .photo-wrap {
-        width:184px;
-        height:184px;
+      .hero {
+        padding:34px 16px 31px;
+      }
+
+      h1 {
+        font-size:44px;
+      }
+
+      .hero-sub {
+        font-size:18px;
+      }
+
+      .date {
+        font-size:24px;
       }
 
       .invite {
@@ -264,9 +309,17 @@
         line-height:1.72;
       }
 
-      .date-main { font-size:27px; }
-      .form-card { padding:17px; }
-      .choices { grid-template-columns:1fr; }
+      .date-main {
+        font-size:27px;
+      }
+
+      .form-card {
+        padding:17px;
+      }
+
+      .choices {
+        grid-template-columns:1fr;
+      }
     }
   </style>
 </head>
@@ -275,92 +328,103 @@
   <main class="page">
 
     <section class="card hero">
-      <div class="eyebrow">Шақыру</div>
+      <div class="content">
+        <div class="eyebrow">Шақыру</div>
+        <div class="ornament">◆ ◆ ◆</div>
 
-      <div class="photo-wrap">
-        <img src="./main_photo.jpeg" alt="Беркін Елемес">
-      </div>
+        <h1>Беркін Елемес</h1>
 
-      <h1>Беркін Елемес</h1>
-      <div class="date">17.10.2026</div>
-    </section>
+        <div class="hero-sub">
+          Әкемізді еске алып, Құран бағыштауға арналған отбасылық жиын
+        </div>
 
-    <section class="card">
-      <h2>Құрметті туысқандар!</h2>
-
-      <div class="invite">
-        Әкеміздің туған күніне орай, үйде Әкемізді еске алып,
-        Құран бағыштап, жақындарымыздың басын қосайық деп отырмыз.
-        Бұйырса, келіп, бірге дұға бағыштап кетіңіздер.
+        <div class="date">18.10.2026</div>
       </div>
     </section>
 
     <section class="card">
-      <div class="date-box">
-        <div class="date-label">Өтетін күні</div>
-        <div class="date-main">17 қазан 2026 жыл</div>
+      <div class="content">
+        <h2>Құрметті туысқандар!</h2>
+
+        <div class="invite">
+          Әкеміздің туған күніне орай, үйде Әкемізді еске алып,
+          Құран бағыштап, жақындарымыздың басын қосайық деп отырмыз.
+          Бұйырса, келіп, бірге дұға бағыштап кетіңіздер.
+        </div>
       </div>
     </section>
 
     <section class="card">
-      <h2>Келуіңізді растаңыз</h2>
+      <div class="content">
+        <div class="date-box">
+          <div class="date-label">Өтетін күні</div>
+          <div class="date-main">18 қазан 2026 жыл</div>
+          <div class="date-sub">Жексенбі</div>
+        </div>
+      </div>
+    </section>
 
-      <div class="form-card">
-        <p class="intro">
-          Өтінеміз, аты-жөніңізді жазып, қатысуыңызды белгілеңіз.
-        </p>
+    <section class="card">
+      <div class="content">
+        <h2>Келуіңізді растаңыз</h2>
 
-        <form
-          id="rsvpForm"
-          method="POST"
-          target="rsvpSink"
-          action="https://script.google.com/macros/s/AKfycbzXWph9m63Bviomy0Jynb_1UirDJ8ImdVRP18rtoOI52Nwb4UCelFYNSH8rwhECMnh2/exec">
+        <div class="form-card">
+          <p class="intro">
+            Өтінеміз, аты-жөніңізді жазып, қатысуыңызды белгілеңіз.
+          </p>
 
-          <input type="hidden" name="event" value="Беркін Елемес">
-          <input type="hidden" name="eventDate" value="17.10.2026">
+          <form
+            id="rsvpForm"
+            method="POST"
+            target="rsvpSink"
+            action="https://script.google.com/macros/s/AKfycbzXWph9m63Bviomy0Jynb_1UirDJ8ImdVRP18rtoOI52Nwb4UCelFYNSH8rwhECMnh2/exec">
 
-          <div>
-            <label class="label" for="name">Аты-жөніңіз</label>
-            <input
-              class="input"
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Аты-жөніңізді жазыңыз"
-              autocomplete="name"
-              required>
-          </div>
+            <input type="hidden" name="event" value="Беркін Елемес">
+            <input type="hidden" name="eventDate" value="18.10.2026">
 
-          <div>
-            <span class="label">Қатысуыңыз</span>
+            <div>
+              <label class="label" for="name">Аты-жөніңіз</label>
+              <input
+                class="input"
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Аты-жөніңізді жазыңыз"
+                autocomplete="name"
+                required>
+            </div>
 
-            <div class="choices">
-              <div class="choice">
-                <input id="yes" type="radio" name="attendance" value="Келемін" required>
-                <label for="yes">Келемін</label>
-              </div>
+            <div>
+              <span class="label">Қатысуыңыз</span>
 
-              <div class="choice">
-                <input id="no" type="radio" name="attendance" value="Келе алмаймын" required>
-                <label for="no">Келе алмаймын</label>
+              <div class="choices">
+                <div class="choice">
+                  <input id="yes" type="radio" name="attendance" value="Келемін" required>
+                  <label for="yes">Келемін</label>
+                </div>
+
+                <div class="choice">
+                  <input id="no" type="radio" name="attendance" value="Келе алмаймын" required>
+                  <label for="no">Келе алмаймын</label>
+                </div>
               </div>
             </div>
-          </div>
 
-          <button id="submitBtn" type="submit">Жауапты жіберу</button>
-          <div class="status" id="status"></div>
-        </form>
+            <button id="submitBtn" type="submit">Жауапты жіберу</button>
+            <div class="status" id="status"></div>
+          </form>
 
-        <iframe
-          name="rsvpSink"
-          id="rsvpSink"
-          title="RSVP"
-          style="display:none"></iframe>
+          <iframe
+            name="rsvpSink"
+            id="rsvpSink"
+            title="RSVP"
+            style="display:none"></iframe>
+        </div>
       </div>
     </section>
 
     <section class="card">
-      <div class="footer">
+      <div class="content footer">
         Бұйырса, жүздесіп, Әкемізге бірге Құран бағыштайық.
       </div>
     </section>
@@ -392,4 +456,3 @@
   </script>
 </body>
 </html>
-
