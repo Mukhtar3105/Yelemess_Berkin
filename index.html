@@ -1,432 +1,576 @@
 <!DOCTYPE html>
 <html lang="kk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#efe2c5">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#efe3c7" />
   <title>Беркін Елемес — Шақыру</title>
 
   <style>
     :root {
-      --paper:rgba(255,250,240,.95);
-      --text:#563927;
-      --muted:#806654;
-      --accent:#aa6942;
-      --accent2:#c9875a;
-      --line:rgba(157,112,73,.24);
-      --shadow:0 20px 55px rgba(86,57,39,.13);
+      --bg1: #f7edd8;
+      --bg2: #ecd9b2;
+      --paper: rgba(255, 250, 240, 0.92);
+      --paper-strong: rgba(255, 252, 247, 0.97);
+      --text: #4d3527;
+      --muted: #796150;
+      --accent: #9e6546;
+      --accent-2: #be825e;
+      --line: rgba(133, 92, 62, 0.18);
+      --shadow: 0 18px 55px rgba(95, 62, 38, 0.12);
+      --shadow-soft: 0 10px 28px rgba(95, 62, 38, 0.08);
+      --radius: 30px;
     }
 
-    * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
-      margin:0;
-      min-height:100vh;
-      font-family:Georgia,"Times New Roman",serif;
-      color:var(--text);
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--text);
       background:
-        radial-gradient(circle at 50% 0%,rgba(255,255,255,.72),transparent 32%),
-        radial-gradient(circle at 5% 80%,rgba(181,133,82,.12),transparent 28%),
-        radial-gradient(circle at 95% 25%,rgba(199,153,102,.11),transparent 28%),
-        linear-gradient(180deg,#f7efdf,#ecdbb9);
-      padding:18px 12px 60px;
+        radial-gradient(circle at 15% 15%, rgba(255,255,255,0.62), transparent 24%),
+        radial-gradient(circle at 88% 12%, rgba(255,255,255,0.4), transparent 18%),
+        radial-gradient(circle at 80% 75%, rgba(205,162,114,0.10), transparent 22%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      padding: 18px 12px 54px;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .07;
+      background:
+        radial-gradient(circle at 25px 25px, rgba(148,103,69,.25) 0 1.4px, transparent 1.7px);
+      background-size: 60px 60px;
     }
 
     .page {
-      width:min(720px,94vw);
-      margin:0 auto;
+      width: min(900px, 96vw);
+      margin: 0 auto;
     }
 
-    .card {
-      position:relative;
-      overflow:hidden;
-      margin:14px 0;
-      padding:30px 22px;
-      border-radius:28px;
-      border:1px solid var(--line);
-      background:var(--paper);
-      box-shadow:var(--shadow);
+    .section {
+      position: relative;
+      overflow: hidden;
+      margin: 14px 0;
+      padding: 28px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(4px);
     }
 
-    .card::before {
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      opacity:.08;
+    .section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
       background:
-        radial-gradient(circle at 18px 18px,rgba(164,111,67,.28) 0 1.5px,transparent 2px);
-      background-size:58px 58px;
+        radial-gradient(ellipse at top right, rgba(187,138,95,.10), transparent 40%),
+        radial-gradient(ellipse at bottom left, rgba(171,121,80,.06), transparent 42%);
     }
 
-    .content {
-      position:relative;
-      z-index:1;
+    .section > * {
+      position: relative;
+      z-index: 1;
     }
 
     .hero {
-      text-align:center;
-      padding:42px 22px 38px;
+      padding: 34px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .photo-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .photo-wrap::before {
+      content: "";
+      position: absolute;
+      inset: -12px;
+      border-radius: 42px 42px 120px 120px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.75), rgba(234,212,182,.45));
+      border: 1px solid rgba(160,112,74,.18);
+      box-shadow: var(--shadow-soft);
+      transform: rotate(-3deg);
+    }
+
+    .photo-wrap::after {
+      content: "✦";
+      position: absolute;
+      right: -10px;
+      top: 14px;
+      width: 56px;
+      height: 56px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #fff7ee;
+      font-size: 24px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border: 3px solid rgba(255,250,244,.88);
+      box-shadow: 0 10px 20px rgba(158,101,70,.25);
+    }
+
+    .photo-frame {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: 34px 34px 110px 110px;
+      border: 8px solid rgba(255,250,242,.95);
+      box-shadow: 0 16px 36px rgba(95,62,38,.16);
+      background: #eadcc6;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .eyebrow {
-      display:inline-block;
-      margin-bottom:20px;
-      padding:8px 16px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      color:#876249;
-      font-size:12px;
-      font-weight:700;
-      letter-spacing:.20em;
-      text-transform:uppercase;
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: #846552;
+      background: rgba(255,252,247,.72);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
     }
 
     .ornament {
-      margin:8px auto 22px;
-      font-size:28px;
-      letter-spacing:10px;
-      color:#b58b63;
-      opacity:.72;
+      margin: 0 0 16px;
+      color: #b88a64;
+      font-size: 22px;
+      letter-spacing: 6px;
     }
 
     h1 {
-      margin:0;
-      font-size:clamp(42px,10vw,64px);
-      line-height:1.08;
-      color:#70472f;
+      margin: 0;
+      font-size: clamp(38px, 7vw, 64px);
+      line-height: 1.06;
+      color: #6a432d;
     }
 
-    .hero-sub {
-      margin:14px auto 0;
-      max-width:520px;
-      font-size:20px;
-      line-height:1.55;
-      color:#795845;
+    .subtitle {
+      margin-top: 12px;
+      font-size: clamp(18px, 2.3vw, 23px);
+      line-height: 1.6;
+      color: #745948;
     }
 
-    .date {
-      margin-top:18px;
-      font-size:28px;
-      font-weight:700;
-      color:#9a6443;
+    .hero-date {
+      margin-top: 20px;
+      font-size: clamp(24px, 4vw, 30px);
+      font-weight: 700;
+      color: var(--accent);
     }
 
-    h2 {
-      margin:0 0 18px;
-      text-align:center;
-      font-size:clamp(27px,7vw,36px);
-      color:#6c472f;
+    .divider {
+      width: 80px;
+      height: 2px;
+      margin: 18px 0 0;
+      background: linear-gradient(90deg, transparent, rgba(158,101,70,.8), transparent);
     }
 
-    .invite {
-      max-width:620px;
-      margin:auto;
-      text-align:center;
-      font-size:20px;
-      line-height:1.75;
+    .section-title {
+      margin: 0 0 18px;
+      text-align: center;
+      font-size: clamp(28px, 4.6vw, 40px);
+      color: #68442e;
     }
 
-    .date-box {
-      text-align:center;
-      padding:22px;
-      border-radius:20px;
-      border:1px solid var(--line);
-      background:rgba(255,253,247,.74);
+    .text-block {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: clamp(18px, 2.3vw, 21px);
+      line-height: 1.8;
+      color: #5f4636;
     }
 
-    .date-label {
-      font-size:12px;
-      letter-spacing:.18em;
-      font-weight:700;
-      text-transform:uppercase;
-      color:#936d53;
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
     }
 
-    .date-main {
-      margin-top:8px;
-      font-size:32px;
-      font-weight:700;
-      color:#70462f;
+    .fact {
+      padding: 24px 22px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: var(--paper-strong);
+      box-shadow: var(--shadow-soft);
+      text-align: center;
     }
 
-    .date-sub {
-      margin-top:7px;
-      font-size:17px;
-      color:#806654;
+    .fact .label {
+      margin-bottom: 8px;
+      font-size: 12px;
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      letter-spacing: .20em;
+      text-transform: uppercase;
+      color: #8a6955;
     }
 
-    .form-card {
-      max-width:610px;
-      margin:auto;
-      padding:22px;
-      border:1px solid var(--line);
-      border-radius:22px;
-      background:rgba(255,253,247,.72);
+    .fact .value {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      color: #69422d;
+      line-height: 1.15;
     }
 
-    .intro {
-      margin:0 0 18px;
-      text-align:center;
-      color:var(--muted);
-      font-size:16px;
-      line-height:1.6;
+    .fact .sub {
+      margin-top: 8px;
+      font-size: 18px;
+      color: #7b6354;
+    }
+
+    .rsvp-shell {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      border-radius: 26px;
+      border: 1px solid var(--line);
+      background: rgba(255,253,247,.82);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .rsvp-intro {
+      margin: 0 0 20px;
+      text-align: center;
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--muted);
     }
 
     form {
-      display:grid;
-      gap:14px;
+      display: grid;
+      gap: 15px;
     }
 
-    .label {
-      display:block;
-      margin:0 0 7px 3px;
-      font-family:Arial,sans-serif;
-      font-size:13px;
-      font-weight:700;
-      color:#745541;
+    .field-label {
+      display: block;
+      margin: 0 0 8px 2px;
+      font: 700 13px Arial, sans-serif;
+      letter-spacing: .04em;
+      color: #765544;
     }
 
     .input {
-      width:100%;
-      padding:14px 15px;
-      border:1px solid rgba(157,112,73,.28);
-      border-radius:15px;
-      background:#fffdf8;
-      color:#553c2d;
-      font:500 16px Arial,sans-serif;
-      outline:none;
+      width: 100%;
+      padding: 15px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(133,92,62,.26);
+      background: #fffdf9;
+      color: #4d3527;
+      font: 500 16px Arial, sans-serif;
+      outline: none;
+      transition: .18s ease;
     }
 
     .input:focus {
-      border-color:#bb7b52;
-      box-shadow:0 0 0 4px rgba(187,123,82,.11);
+      border-color: #b67954;
+      box-shadow: 0 0 0 4px rgba(182,121,84,.10);
     }
 
     .choices {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
     }
 
     .choice {
-      position:relative;
+      position: relative;
     }
 
     .choice input {
-      position:absolute;
-      opacity:0;
-      pointer-events:none;
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
     }
 
     .choice label {
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:56px;
-      padding:12px;
-      border-radius:16px;
-      border:1px solid rgba(157,112,73,.25);
-      background:#fffaf1;
-      cursor:pointer;
-      font-family:Arial,sans-serif;
-      font-size:15px;
-      font-weight:700;
-      text-align:center;
-      color:#745541;
-      transition:.18s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 58px;
+      padding: 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(133,92,62,.24);
+      background: #fffaf2;
+      cursor: pointer;
+      text-align: center;
+      color: #725442;
+      font: 700 15px Arial, sans-serif;
+      transition: .18s ease;
     }
 
     .choice input:checked + label {
-      color:#fff;
-      border-color:transparent;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      box-shadow:0 10px 24px rgba(170,105,66,.24);
+      color: white;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 12px 24px rgba(158,101,70,.22);
     }
 
-    button {
-      width:100%;
-      margin-top:4px;
-      border:0;
-      border-radius:16px;
-      padding:15px 18px;
-      color:#fff;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      font:700 16px Arial,sans-serif;
-      cursor:pointer;
-      box-shadow:0 12px 27px rgba(170,105,66,.22);
+    .submit-btn {
+      border: 0;
+      border-radius: 18px;
+      padding: 16px 18px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      font: 700 16px Arial, sans-serif;
+      cursor: pointer;
+      box-shadow: 0 14px 28px rgba(158,101,70,.22);
+      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
     }
 
-    button:disabled {
-      opacity:.60;
-      cursor:not-allowed;
+    .submit-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 30px rgba(158,101,70,.24);
+    }
+
+    .submit-btn:disabled {
+      opacity: .65;
+      cursor: not-allowed;
+      transform: none;
     }
 
     .status {
-      min-height:22px;
-      text-align:center;
-      font-family:Arial,sans-serif;
-      font-size:13px;
-      color:#725442;
+      min-height: 22px;
+      text-align: center;
+      color: #775847;
+      font: 500 13px Arial, sans-serif;
     }
 
-    .footer {
-      text-align:center;
-      font-size:17px;
-      line-height:1.65;
-      color:#765845;
+    .footer-note {
+      text-align: center;
+      font-size: 18px;
+      line-height: 1.75;
+      color: #705646;
     }
 
-    @media(max-width:520px) {
-      body { padding:10px 8px 40px; }
-      .page { width:96vw; }
+    .small-ornament {
+      text-align: center;
+      margin-top: 8px;
+      color: #bb8f69;
+      font-size: 20px;
+      letter-spacing: 5px;
+    }
 
-      .card {
-        margin:10px 0;
-        padding:25px 16px;
-        border-radius:22px;
-      }
-
+    @media (max-width: 760px) {
       .hero {
-        padding:34px 16px 31px;
+        padding: 22px 18px 24px;
       }
 
-      h1 {
-        font-size:44px;
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
       }
 
-      .hero-sub {
-        font-size:18px;
+      .photo-wrap {
+        max-width: 250px;
       }
 
-      .date {
-        font-size:24px;
+      .hero-copy {
+        text-align: center;
       }
 
-      .invite {
-        font-size:17px;
-        line-height:1.72;
+      .divider {
+        margin-left: auto;
+        margin-right: auto;
       }
 
-      .date-main {
-        font-size:27px;
+      .facts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 10px 8px 40px;
       }
 
-      .form-card {
-        padding:17px;
+      .section {
+        margin: 10px 0;
+        padding: 18px 14px;
+        border-radius: 22px;
+      }
+
+      .photo-wrap::before {
+        inset: -8px;
+      }
+
+      .photo-wrap::after {
+        width: 48px;
+        height: 48px;
+        right: -6px;
+        top: 10px;
+        font-size: 20px;
+      }
+
+      .photo-frame {
+        border-width: 6px;
+        border-radius: 28px 28px 88px 88px;
+      }
+
+      .section-title {
+        margin-bottom: 14px;
+      }
+
+      .text-block {
+        font-size: 17px;
+      }
+
+      .rsvp-shell {
+        padding: 18px 14px;
+        border-radius: 20px;
       }
 
       .choices {
-        grid-template-columns:1fr;
+        grid-template-columns: 1fr;
+      }
+
+      .subtitle {
+        font-size: 17px;
       }
     }
   </style>
 </head>
-
 <body>
   <main class="page">
 
-    <section class="card hero">
-      <div class="content">
-        <div class="eyebrow">Шақыру</div>
-        <div class="ornament">◆ ◆ ◆</div>
-
-        <h1>Беркін Елемес</h1>
-
-        <div class="hero-sub">
-          Әкемізді еске алып, Құран бағыштауға арналған отбасылық жиын
+    <section class="section hero">
+      <div class="hero-grid">
+        <div class="photo-wrap">
+          <div class="photo-frame">
+            <img src="1_photo.png" alt="Беркін Елемеске арналған естелік сурет" />
+          </div>
         </div>
 
-        <div class="date">18.10.2026</div>
-      </div>
-    </section>
-
-    <section class="card">
-      <div class="content">
-        <h2>Құрметті туысқандар!</h2>
-
-        <div class="invite">
-          Әкеміздің туған күніне орай, үйде Әкемізді еске алып,
-          Құран бағыштап, жақындарымыздың басын қосайық деп отырмыз.
-          Бұйырса, келіп, бірге дұға бағыштап кетіңіздер.
+        <div class="hero-copy">
+          <div class="eyebrow">Шақыру</div>
+          <div class="ornament">◆ ◆ ◆</div>
+          <h1>Беркін Елемес</h1>
+          <div class="subtitle">
+            Әкемізді еске алып, Құран бағыштауға арналған отбасылық жиын
+          </div>
+          <div class="hero-date">18.10.2026</div>
+          <div class="divider"></div>
         </div>
       </div>
     </section>
 
-    <section class="card">
-      <div class="content">
-        <div class="date-box">
-          <div class="date-label">Өтетін күні</div>
-          <div class="date-main">18 қазан 2026 жыл</div>
-          <div class="date-sub">Жексенбі</div>
+    <section class="section">
+      <h2 class="section-title">Құрметті туысқандар!</h2>
+      <div class="text-block">
+        Әкеміздің туған күніне орай, үйде Әкемізді еске алып,
+        Құран бағыштап, жақындарымыздың басын қосайық деп отырмыз.
+        Бұйырса, келіп, бірге дұға бағыштап кетіңіздер.
+      </div>
+      <div class="small-ornament">✦ ✦ ✦</div>
+    </section>
+
+    <section class="section">
+      <div class="facts-grid">
+        <div class="fact">
+          <div class="label">Өтетін күні</div>
+          <div class="value">18 қазан 2026</div>
+          <div class="sub">Жексенбі</div>
+        </div>
+
+        <div class="fact">
+          <div class="label">Іс-шара жайлы</div>
+          <div class="value" style="font-size:clamp(24px,3.8vw,34px);">Құран бағыштау</div>
+          <div class="sub">Отбасылық еске алу кеші</div>
         </div>
       </div>
     </section>
 
-    <section class="card">
-      <div class="content">
-        <h2>Келуіңізді растаңыз</h2>
+    <section class="section">
+      <h2 class="section-title">Келуіңізді растаңыз</h2>
 
-        <div class="form-card">
-          <p class="intro">
-            Өтінеміз, аты-жөніңізді жазып, қатысуыңызды белгілеңіз.
-          </p>
+      <div class="rsvp-shell">
+        <p class="rsvp-intro">
+          Өтінеміз, аты-жөніңізді жазып, қатысу мәртебеңізді белгілеңіз.
+        </p>
 
-          <form
-            id="rsvpForm"
-            method="POST"
-            target="rsvpSink"
-            action="https://script.google.com/macros/s/AKfycbzXWph9m63Bviomy0Jynb_1UirDJ8ImdVRP18rtoOI52Nwb4UCelFYNSH8rwhECMnh2/exec">
+        <form id="rsvpForm" method="POST" target="rsvpSink" action="https://script.google.com/macros/s/AKfycbzXWph9m63Bviomy0Jynb_1UirDJ8ImdVRP18rtoOI52Nwb4UCelFYNSH8rwhECMnh2/exec">
+          <input type="hidden" name="event" value="Беркін Елемес" />
+          <input type="hidden" name="eventDate" value="18.10.2026" />
 
-            <input type="hidden" name="event" value="Беркін Елемес">
-            <input type="hidden" name="eventDate" value="18.10.2026">
+          <div>
+            <label class="field-label" for="name">Аты-жөніңіз</label>
+            <input
+              class="input"
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Аты-жөніңізді жазыңыз"
+              autocomplete="name"
+              required
+            />
+          </div>
 
-            <div>
-              <label class="label" for="name">Аты-жөніңіз</label>
-              <input
-                class="input"
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Аты-жөніңізді жазыңыз"
-                autocomplete="name"
-                required>
-            </div>
+          <div>
+            <span class="field-label">Қатысуыңыз</span>
+            <div class="choices">
+              <div class="choice">
+                <input id="yes" type="radio" name="attendance" value="Келемін" required />
+                <label for="yes">Келемін</label>
+              </div>
 
-            <div>
-              <span class="label">Қатысуыңыз</span>
-
-              <div class="choices">
-                <div class="choice">
-                  <input id="yes" type="radio" name="attendance" value="Келемін" required>
-                  <label for="yes">Келемін</label>
-                </div>
-
-                <div class="choice">
-                  <input id="no" type="radio" name="attendance" value="Келе алмаймын" required>
-                  <label for="no">Келе алмаймын</label>
-                </div>
+              <div class="choice">
+                <input id="no" type="radio" name="attendance" value="Келе алмаймын" required />
+                <label for="no">Келе алмаймын</label>
               </div>
             </div>
+          </div>
 
-            <button id="submitBtn" type="submit">Жауапты жіберу</button>
-            <div class="status" id="status"></div>
-          </form>
+          <button class="submit-btn" id="submitBtn" type="submit">Жауапты жіберу</button>
+          <div class="status" id="status"></div>
+        </form>
 
-          <iframe
-            name="rsvpSink"
-            id="rsvpSink"
-            title="RSVP"
-            style="display:none"></iframe>
-        </div>
+        <iframe
+          name="rsvpSink"
+          id="rsvpSink"
+          title="RSVP response"
+          style="display:none"></iframe>
       </div>
     </section>
 
-    <section class="card">
-      <div class="content footer">
+    <section class="section">
+      <div class="footer-note">
         Бұйырса, жүздесіп, Әкемізге бірге Құран бағыштайық.
       </div>
+      <div class="small-ornament">◆ ◆ ◆</div>
     </section>
 
   </main>
