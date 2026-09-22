@@ -474,6 +474,20 @@
       }
     }
 
+  
+    .event-time{
+      margin-top:10px;
+      font-size:18px;
+      font-weight:700;
+      color:#9e6546;
+    }
+
+    @media (max-width:520px){
+      .event-time{
+        font-size:17px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -494,7 +508,7 @@
           <div class="subtitle">
             Әкемізді еске алып, Құран бағыштауға арналған отбасылық жиын
           </div>
-          <div class="hero-date">18.10.2026</div>
+          <div class="hero-date">18.10.2026 · 13:00</div>
           <div class="divider"></div>
         </div>
       </div>
@@ -517,6 +531,7 @@
           <div class="label">Өтетін күні</div>
           <div class="value">18 қазан 2026</div>
           <div class="sub">Жексенбі</div>
+          <div class="event-time">Уақыты: 13:00</div>
         </div>
 
         <div class="fact">
@@ -538,6 +553,7 @@
         <form id="rsvpForm" method="POST" target="rsvpSink" action="https://script.google.com/macros/s/AKfycbxgP2VRjRuz8-vH_1SZN11tbptNYLDtM1a-elroBS4avWbPMHfhEe5RhqLFCI8YUKIl/exec">
           <input type="hidden" name="event" value="Беркін Елемес" />
           <input type="hidden" name="eventDate" value="18.10.2026" />
+          <input type="hidden" name="eventTime" value="13:00" />
 
           <div>
             <label class="field-label" for="name">Аты-жөніңіз</label>
